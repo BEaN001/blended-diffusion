@@ -109,7 +109,10 @@ class ImageEditor:
         else:
             masked_input = x_in
         augmented_input = self.image_augmentations(masked_input).add(1).div(2)
+        # augmented_input = TF.to_tensor(augmented_input)
+       # print(augmented_input)
         clip_in = self.clip_normalize(augmented_input)
+       # print(clip_in)
         image_embeds = self.clip_model.encode_image(clip_in).float()
         dists = d_clip_loss(image_embeds, text_embed)
 
